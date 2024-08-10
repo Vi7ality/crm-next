@@ -3,12 +3,13 @@
 import React from 'react';
 import Image from 'next/image';
 import SidebarItem from '@/app/components/sidebar-item';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export interface SidebarProps {}
 
 const Sidebar = ({}: SidebarProps) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleExitClick = () => {
     router.push('/');
@@ -26,6 +27,7 @@ const Sidebar = ({}: SidebarProps) => {
         />
         <ul className="space-y-7">
           <SidebarItem
+            current={pathname === '/dashboard'}
             pathname="/dashboard"
             src="/icons/squares.svg"
             alt="dashboard icon"
@@ -33,6 +35,7 @@ const Sidebar = ({}: SidebarProps) => {
             Dashboard
           </SidebarItem>
           <SidebarItem
+            current={pathname === '/companies'}
             pathname="/companies"
             src="/icons/briefcase.svg"
             alt="companies icon"
