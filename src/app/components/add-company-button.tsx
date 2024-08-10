@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Button from './button';
 import Modal from './modal';
 
-const CompanyFormModal = () => {
+const AddCompanyButton = () => {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
@@ -13,3 +13,5 @@ const CompanyFormModal = () => {
     </>
   );
 };
+
+export default AddCompanyButton;
