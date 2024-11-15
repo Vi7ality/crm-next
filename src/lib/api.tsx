@@ -62,13 +62,15 @@ const buildUrl = (...paths: string[]) =>
 const stringifyQueryParams = (params: Record<string, string>) =>
   new URLSearchParams(params).toString();
 
-const sendRequest = async <T>(url: string, init?: RequestInit) => {
+const sendRequest = async (url: string, init?: RequestInit) => {
   const res = await fetch(url, init);
   if (!res.ok) {
-    throw new Error(await res.text());
+    const errorMessage = await res.text();
+    throw new Error(
+      `Request failed with status ${res.status} (${res.statusText}): ${errorMessage}`,
+    );
   }
-
-  return (await res.json()) as T;
+  return await res.json();
 };
 
 export const getSummaryStats = (init?: RequestInit) => {
